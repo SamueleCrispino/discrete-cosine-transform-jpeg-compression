@@ -1,0 +1,146 @@
+
+<TextInput>
+    multiline: False
+
+<Button>
+    font_size: 28
+    size_hint: (None, None)
+    size: (200, 50)
+
+
+
+<MyGridLayout>
+
+    f: f
+    d: d
+    
+    GridLayout:
+        cols: 1
+        size: root.width, root.height
+
+        GridLayout:
+            id: inputParamLayout
+
+            height: 300
+
+            cols: 2
+            spacing: 10
+            padding: 25
+
+            col_force_default: True
+            col_default_width: 200
+
+            Button:
+                id: searchImage
+                text: 'search image'
+                on_release: root.show_load()
+
+            Button:
+                id: clean
+                text: 'clean'
+                on_release: root.clean_all()
+
+        GridLayout:
+            id: layout_f
+
+
+            height: 300
+
+            cols: 2
+            spacing: 10
+            padding: 25
+
+            row_force_default: True
+            row_default_height: 40
+            col_force_default: True
+            col_default_width: 200
+
+            Label:
+                id: label_f
+                text: "Blocks dimensions: "
+                opacity: 0
+            TextInput
+                id: f
+                opacity: 0
+            Button:
+                id: getInputButtonF
+                text: "Submit"
+                on_press: root.my_click_funcF()
+                opacity: 0
+                
+                
+
+
+        
+        GridLayout:
+            id: layout_d 
+
+            height: 300
+
+            cols: 2
+            spacing: 10
+            padding: 25
+
+            row_force_default: True
+            row_default_height: 40
+            col_force_default: True
+            col_default_width: 200
+
+            Label:
+                id: label_d
+                text: "Frequency threshold: "
+                opacity: 0
+            Slider
+                id: d
+                step: 1
+                opacity: 0
+            Button:
+                id: getInputButtonD
+                text: "Submit"
+                on_press: root.my_click_funcD()
+                opacity: 0
+    
+        GridLayout:
+            id: thirdLayout
+
+            size_hint_y: 6
+            size_hint_x: 3
+
+            height: 800
+
+            cols: 2
+            spacing: 20
+            padding: 50
+
+            Image:
+                id: firstImage
+                # where the image is located in your machine
+                source: ""
+                opacity: 0
+                pos_hint: {'x': 0}
+                
+
+            Image:
+                id: secondImage
+                source: ""
+                opacity: 0
+
+
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+
+            Button:
+                text: "Load"
+                on_release: root.load_image(filechooser.selection)
+                # Disable size_hint
+                size_hint: (None, None)
+                size: (100, 50)
